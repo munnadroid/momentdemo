@@ -4,5 +4,6 @@
     <string name="app_name">MomentDemo</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="ab_title_value">Discover</string>
 
 </resources>
