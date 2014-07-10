@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.example.momentdemo.http.HttpGetMomentData;
 
 
 public class MainActivity extends SherlockActivity {
+
+    public static final String TAG=MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +18,10 @@ public class MainActivity extends SherlockActivity {
         setContentView(R.layout.activity_main);
 
         initActionbar();
+
+
+        new HttpGetMomentData().getHttpMomentData();
+
     }
 
     private void initActionbar() {
