@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ab_start_color">#5a504e</color>
+    <color name="ab_center_color">#514947</color>
+    <color name="ab_end_color">#514946</color>
+    <color name="ab_title_text_color">#fbfcfd</color>
+</resources>
