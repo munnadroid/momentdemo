@@ -4,4 +4,5 @@
     <color name="ab_center_color">#514947</color>
     <color name="ab_end_color">#514946</color>
     <color name="ab_title_text_color">#fbfcfd</color>
+    <color name="list_row_text_color">#d7d4d1</color>
 </resources>
