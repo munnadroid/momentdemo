@@ -6,11 +6,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.example.momentdemo.adapter.MomentListAdapter;
-import com.example.momentdemo.datamodel.MomentData;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.momentdemo.http.HttpGetMomentData;
 
 
 public class MainActivity extends SherlockActivity {
@@ -18,8 +14,6 @@ public class MainActivity extends SherlockActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
 
     private ListView mListView;
-    private List<MomentData> mMomentList=new ArrayList<MomentData>();
-    private MomentListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,18 +22,8 @@ public class MainActivity extends SherlockActivity {
 
         initActionbar();
 
-
-        //new HttpGetMomentData(MainActivity.this).getHttpMomentData();
-        mMomentList.add(new MomentData(1,"raju"));
-        mMomentList.add(new MomentData(1,"raju"));
-        mMomentList.add(new MomentData(1,"raju"));
-        mMomentList.add(new MomentData(1,"raju"));
-        mMomentList.add(new MomentData(1,"raju"));
-        mMomentList.add(new MomentData(1,"raju"));
-
         mListView = (ListView) findViewById(R.id.moment_listview);
-        mAdapter=new MomentListAdapter(this,mMomentList);
-        mListView.setAdapter(mAdapter);
+        new HttpGetMomentData(MainActivity.this, mListView).getHttpMomentData();
 
 
     }
