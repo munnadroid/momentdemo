@@ -25,6 +25,7 @@
         android:layout_alignTop="@+id/title"
         android:background="@null"
         android:padding="4dp"
+        android:layout_centerVertical="true"
         android:src="@drawable/sliding_menu_navigation"
 
         />
