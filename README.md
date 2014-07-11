@@ -2,6 +2,9 @@ momentdemo
 ==========
 Sample demo application
 
+Screenshot
+==========
+![Application ScreenShot](https://raw.github.com/munnadroid/momentdemo/master/screenshot.png)
 
 Library used
 ============
