@@ -1,5 +1,6 @@
 package com.example.momentdemo.http;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
@@ -67,8 +68,6 @@ public class HttpGetMomentData {
             public void onSuccess(int x, Header[] headers, byte[] bytes) {
 
                 String response = new String(bytes);
-//                Log.v(MainActivity.TAG, "moment success response: " + response);
-
 
                 try {
                     JSONObject mainObject = new JSONObject(response);
@@ -147,7 +146,14 @@ public class HttpGetMomentData {
 
     private void populateListView() {
 
-        mAdapter = new MomentListAdapter(mContext, mMomentList);
-        mListView.setAdapter(mAdapter);
+        ((Activity) mContext).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                mAdapter = new MomentListAdapter(mContext, mMomentList);
+                mListView.setAdapter(mAdapter);
+            }
+        });
+
     }
 }
