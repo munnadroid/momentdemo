@@ -9,13 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.momentdemo.MainActivity;
 import com.example.momentdemo.R;
 import com.example.momentdemo.datamodel.MomentData;
 import com.makeramen.RoundedImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class MomentListAdapter extends BaseAdapter {
 
     private class ViewHolder {
 
-        RelativeLayout rowRelativeLayout;
+        ImageView backgroundImageView;
         TextView titleTextView;
         TextView photoCountTextView;
         TextView videoCountTextView;
@@ -71,7 +72,7 @@ public class MomentListAdapter extends BaseAdapter {
             rowView = mInflator.inflate(R.layout.moment_list_row, null);
             holder = new ViewHolder();
 
-            holder.rowRelativeLayout = (RelativeLayout) rowView.findViewById(R.id.list_layout);
+            holder.backgroundImageView = (ImageView) rowView.findViewById(R.id.user_bg_list_row);
             holder.titleTextView = (TextView) rowView.findViewById(R.id.title_textview_list_row);
             holder.photoCountTextView = (TextView) rowView.findViewById(R.id.camera_textview_list_row);
             holder.videoCountTextView = (TextView) rowView.findViewById(R.id.video_textview_list_row);
@@ -86,10 +87,50 @@ public class MomentListAdapter extends BaseAdapter {
         MomentData data = mListData.get(position);
 
         holder.titleTextView.setText(data.getTitle());
-        holder.photoCountTextView.setText(String.valueOf(data.getPhotoCount()));
-        holder.videoCountTextView.setText(String.valueOf(data.getVideoCount()));
-        holder.audioCountTextView.setText(String.valueOf(data.getVideoCount()));
+        int photoCount = data.getPhotoCount();
+        int videoCount = data.getVideoCount();
+        int audioCount = data.getVideoCount();
+        holder.photoCountTextView.setText(String.valueOf(photoCount));
+        holder.videoCountTextView.setText(String.valueOf(videoCount));
+        holder.audioCountTextView.setText(String.valueOf(audioCount));
+
+        int countEmptyTextColor = mContext.getResources().getColor(R.color.count_empty_text_color);
+        int countTextColor = mContext.getResources().getColor(R.color.count_text_color);
+        if (photoCount == 0) {
+            holder.photoCountTextView.setTextColor(countEmptyTextColor);
+            holder.photoCountTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.camera_listrow_empty, 0);
+        } else {
+            holder.photoCountTextView.setTextColor(countTextColor);
+            holder.photoCountTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.camera_listrow, 0);
+        }
+
+        if (videoCount == 0) {
+            holder.videoCountTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.video_camera_listrow_empty, 0);
+            holder.videoCountTextView.setTextColor(countEmptyTextColor);
+        } else {
+            holder.videoCountTextView.setTextColor(countTextColor);
+            holder.videoCountTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.video_camera_listrow, 0);
+        }
+
+        if (audioCount == 0) {
+            holder.audioCountTextView.setTextColor(countEmptyTextColor);
+            holder.audioCountTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.audio_list_row_empty, 0);
+        } else {
+            holder.audioCountTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.audio_list_row, 0);
+            holder.audioCountTextView.setTextColor(countTextColor);
+        }
+
         holder.userNameTextView.setText(data.getUsername());
+
+        Picasso.with(mContext)
+                .load(data.getAvatarImageUrl())
+                .placeholder(R.drawable.profile_placeholder)
+                .into(holder.profileImageView);
+
+        Picasso.with(mContext)
+                .load(data.getBackgroundImageUrl())
+                .placeholder(R.drawable.background_placeholder)
+                .into(holder.backgroundImageView);
 
 
         return rowView;
